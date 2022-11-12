@@ -1,21 +1,23 @@
 SET sql_safe_updates = FALSE;
 
 USE defaultdb;
-DROP DATABASE IF EXISTS coursemanager CASCADE;
-CREATE DATABASE IF NOT EXISTS coursemanager;
+DROP DATABASE IF EXISTS coursegrained CASCADE;
+CREATE DATABASE IF NOT EXISTS coursegrained;
 
-USE coursemanager;
+USE coursegrained;
 
 DROP TABLE IF EXISTS coursereviews;
+
+CREATE TYPE sem AS ENUM ('Fall 2020', 'Spring 2021', 'Fall 2021', 'Spring 2022', 'Fall 2022');
 
 CREATE TABLE coursereviews (
     coursename VARCHAR(200) PRIMARY KEY NOT NULL,
     professor  VARCHAR(100),
-    semester ENUM('Fall 2020', 'Spring 2021', 'Fall 2021', 'Spring 2022', 'Fall 2022'),
+    semester sem,
     courseload INTEGER,
-    reviews LONGTEXT,
-    industryroles ENUM('Data Scientist', 'SDE', 'Data Engineer'),
-    prereqs LONGTEXT,
+    reviews TEXT,
+    industryroles VARCHAR(100),
+    prereqs TEXT,
     difficulty INTEGER
 );
 
@@ -24,10 +26,31 @@ DROP TABLE IF EXISTS profreviews;
 CREATE TABLE profreviews (
     profname VARCHAR(100) PRIMARY KEY NOT NULL,
     classtaken VARCHAR(200),
-    semester ENUM('Fall 2020', 'Spring 2021', 'Fall 2021', 'Spring 2022', 'Fall 2022'),
+    semester sem,
     rating INTEGER,
-    reviews LONGTEXT
+    reviews TEXT
 );
 
 DROP TABLE IF EXISTS coursecatalog;
 
+CREATE TABLE coursecatalog (
+    coursename VARCHAR(200) PRIMARY KEY NOT NULL,
+    courseurl VARCHAR(200),
+    description TEXT
+);
+
+DROP TABLE IF EXISTS professors;
+
+CREATE TABLE professors (
+    profname VARCHAR(100) PRIMARY KEY NOT NULL,
+    pagelink VARCHAR(100),
+    department VARCHAR(100)
+);
+
+DROP TABLE IF EXISTS courseinterest;
+
+CREATE TABLE courseinterest (
+    coursename VARCHAR(200) PRIMARY KEY NOT NULL,
+    emailID VARCHAR(200),
+    phone CHAR(10)
+);
