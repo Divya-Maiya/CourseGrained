@@ -11,7 +11,7 @@ def get_user_interest_txn(session, coursename):
         .query(CourseInterest)\
         .filter(CourseInterest.coursename == coursename)\
         .with_entities(CourseInterest.phone)
-    return query
+    return query.all()
 
 def add_score_txn(session, avatar, playername, points):
     score = Score(

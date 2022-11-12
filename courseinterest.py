@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from transactions import add_user_interest_txn, get_user_interest_txn
 
+
 class CourseInterest:
     def __init__(self, conn_string):
         self.engine = create_engine(conn_string, convert_unicode=True)

@@ -15,7 +15,7 @@ class Score(Base):
 
 class CourseInterest(Base):
     __tablename__ = 'courseinterest'
-    coursename = Column(VARCHAR)
+    coursename = Column(VARCHAR, primary_key=True)
     emailID = Column(VARCHAR)
     phone = Column(CHAR)
 
