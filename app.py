@@ -99,6 +99,8 @@ def gcoursecatalog():
 
 @app.route("/courseinfo", methods=['GET'])
 def gcoursereview():
+    #TODO uncomment
+
     # coursename = flask.request.args.get('coursename')
     coursename = "520:Introduction to Software Engineering Practices"
     reviews = coursereviewsobj.get_course_reviews(coursename)
@@ -108,7 +110,7 @@ def gcoursereview():
         print(rev.professor)
 
     for i in info:
-        print(info.department)
+        print(i.department)
 
     # return coursereviewsobj.get_course_info(coursename)
 

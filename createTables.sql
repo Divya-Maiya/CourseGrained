@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS coursereviews;
 
 CREATE TABLE coursereviews (
     id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+    username VARCHAR(200),
     coursename VARCHAR(200),
     professor  VARCHAR(100),
     semester VARCHAR(200),
