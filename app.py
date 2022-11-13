@@ -150,6 +150,7 @@ def gprofreview():
             'reviews': rev.reviews,
         })
 
+    #TODO Change page to right page
     return render_template("CoursesPage.html", reviews=all_reviews, info=info)
 
 @app.route("/allprofessors", methods=['GET'])
@@ -182,6 +183,7 @@ def gpostcoursereviews():
             difficulty=difficulty,
         )
     )
+    #TODO Show pop of success/failure and redirect to home page
     return jsonify(success=True)
 
 
@@ -204,4 +206,5 @@ def gpostprofreviews():
             reviews=reviews,
         )
     )
+    # TODO Show pop of success/failure and redirect to home page
     return jsonify(success=True)
