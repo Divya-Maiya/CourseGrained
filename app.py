@@ -72,6 +72,7 @@ def department():
 def gcourseinterest():
     coursename = flask.request.values.get("coursename")
     phone = flask.request.values.get("phone")
+    print(coursename, phone)
     courseinterestobj.add_user_interest(
         CourseInterestModel(id=str(
             uuid.uuid4()), coursename=coursename, phone=phone))
@@ -80,9 +81,11 @@ def gcourseinterest():
     return render_template("index.html")
 
 
-@app.route("/droppingcourse", methods=['GET'])
+@app.route("/droppingcourse", methods=['POST'])
 def droppingcourse():
-    coursename = flask.request.args.get('coursename')
+    coursename = flask.request.values.get('coursename')
+    print("PRINTCHCHH")
+    print(coursename)
     phones = courseinterestobj.get_user_interest_for_course(coursename)
 
     body = f"Course {coursename} may become available soon. Please check."
@@ -152,7 +155,7 @@ def gprofreview():
         })
 
     #TODO Change page to right page
-    return render_template("CoursesPage.html", reviews=all_reviews, info=info)
+    return render_template("ProfessorPage.html", reviews=all_reviews, info=info)
 
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
@@ -203,6 +206,7 @@ def gpostprofreviews():
 
     professorreviewsobj.add_professor_review(
         ProfessorReviews(
+            id=str(uuid.uuid4()),
             profname=profname,
             classtaken=classtaken,
             semester=semester,
@@ -210,6 +214,7 @@ def gpostprofreviews():
             reviews=reviews,
         )
     )
+    
     # TODO Show pop of success/failure and redirect to home page
     return jsonify(success=True)
 

@@ -10,34 +10,28 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Student reviews">
     <meta name="description" content="">
-    <title>CoursesPage</title>
+    <title>ProfessorPage</title>
 
-    <!-- <link rel="stylesheet" href="nicepage.css" media="screen"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='ProfessorPage.css') }}" media="screen">
     <link rel="stylesheet" href="{{ url_for('static', filename='nicepage.css') }}" media="screen">
-<!-- <link rel="stylesheet" href="HomePage.css" media="screen"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='CoursesPage.css') }}" media="screen">
+
+
+    <!-- <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script> -->
 
     {% block javascript %}
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='nicepage.js') }}" defer=""></script>
     {% endblock %}
-
-    <!-- <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-
-
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script> -->
-
     <meta name="generator" content="Nicepage 4.21.12, nicepage.com">
-    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"name": "WebSite3300843"
 }</script>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="CoursesPage">
+    <meta property="og:title" content="ProfessorPage">
     <meta property="og:type" content="website">
   </head>
   <body class="u-body u-xl-mode" data-lang="en"><header class="u-clearfix u-header u-header" id="sec-8d35"><div class="u-clearfix u-sheet u-sheet-1">
@@ -65,153 +59,70 @@
           </div>
         </nav>
       </div></header>
+
+
     <section class="u-align-center u-clearfix u-section-1" id="sec-8b61">
       <div class="u-container-style u-expanded-width u-group u-palette-4-dark-2 u-group-1">
         <div class="u-container-layout u-container-layout-1">
-          <h2 class="u-align-center u-text u-text-1" spellcheck="false">{{info.coursename}}<br>
-            <span style="font-size: 1.25rem;">{{info.department}}</span>
-          </h2>
-          
+          <h1 class="u-align-center u-text u-text-1" spellcheck="false">Professor ratings and reviews<br>
+            <br>
+          </h1>
           <div class="u-border-3 u-border-palette-3-base u-line u-line-horizontal u-line-1"></div>
-          <p class="u-align-center u-text u-text-2">{{info.description}}
-          </p>
-          <p class="u-align-center u-text u-text-2"><a href={{info.courseurl}}>Link to the Course Page</a></p>
-        </div>
-      </div>
-    </section>
-    <section class="u-clearfix u-color-scheme-u11 u-color-style-multicolor-1 u-palette-4-base u-section-2" id="sec-114b">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div class="u-align-center u-container-style u-layout-cell u-left-cell u-size-46 u-layout-cell-1">
-                <div class="u-container-layout u-container-layout-1">
-                  <h3 class="u-text u-text-1">Interested in this course?&nbsp;Sign up for course alerts!</h3>
-                  <div class="u-form u-form-1">
-                    <form action="/courseinterest" method='POST' class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px;" source="phone">
-                      <div class="u-form-email u-form-group u-label-none">
-                        <label for="email-4542" class="u-label">Phone</label>
-                        <input type="phone" placeholder="Enter a phone number" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
-                        <input type = "hidden" name = "coursename" value = "{{info.coursename}}" />
-                      </div>
-                      <div class="u-form-group u-form-submit">
-                        <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-25 u-text-white u-btn-1">Submit</a>
-                        <input type="submit" value="submit" class="u-form-control-hidden">
-                      </div>
-                      <div class="u-form-send-message u-form-send-error u-form-send-success"> Thank you! Your interest has been registered. </div>
-                      <input type="hidden" value="" name="recaptchaResponse">
-                      <input type="hidden" name="formServices" value="9ea2c1f0d512d004154b68e0ea4e5aba">
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-14 u-layout-cell-2">
-                <div class="u-container-layout u-container-layout-2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="u-clearfix u-palette-3-light-1 u-section-3" id="sec-33aa">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <h3 class="u-align-center u-text u-text-white u-text-1">Dropping the course? H<span style="font-weight: 700;"></span>elp others get the courses you drop!
-        </h3>
-        <div class="u-form u-form-1">
-          <form action="/droppingcourse" method='POST', class="u-clearfix u-form-horizontal u-form-spacing-15 u-inner-form" style="padding: 15px;" source="email">
-            <div class="u-form-email u-form-group u-label-none">
-              <label for="email-4542" class="u-label">Email</label>
-              <input type="email" placeholder="Enter a verfied email address" id="email-4542" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
-              <input type = "hidden" name = "coursename" value = "{{info.coursename}}" />
-            </div>
-            <div class="u-form-group u-form-submit">
-              <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-palette-2-light-1 u-radius-25 u-text-white u-btn-1">Submit</a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
-            </div>
-            <div class="u-form-send-message u-form-send-error u-form-send-success"> Thank you! </div>
-            
+          <form action="#" method="get" class="u-border-1 u-border-grey-30 u-palette-5-light-3 u-radius-50 u-search u-search-left u-search-1">
+            <button class="u-search-button" type="submit">
+              <span class="u-search-icon u-spacing-10">
+                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 56.966 56.966"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-bba9"></use></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="svg-bba9" x="0px" y="0px" viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve" class="u-svg-content"><path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"></path></svg>
+              </span>
+            </button>
+            <input class="u-search-input" type="search" name="search" value="" placeholder="Search">
           </form>
         </div>
       </div>
     </section>
-    <section class="u-align-center u-clearfix u-section-4" id="carousel_132a">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-text u-text-default u-text-1">Course&nbsp;<b style="">reviews</b>
-        </h2>
-        <div class="u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            {% for review in reviews %}
-            <div class="u-container-style u-list-item u-repeater-item u-shape-rectangle">
-              <div class="u-container-layout u-similar-container u-valign-bottom-sm u-container-layout-1">
-                <div alt="" class="u-image u-image-circle u-image-1" data-image-width="1056" data-image-height="1500"></div>
-                <h6 class="u-text u-text-default u-text-2">{{review.username}}</h6><span class="u-file-icon u-icon u-icon-1"><img src="{{ url_for('static', filename='images/2107957.png') }}" alt=""></span><span class="u-file-icon u-icon u-icon-2"><img src="{{ url_for('static', filename='images/2107957.png') }}" alt=""></span>
-                <p class="u-text u-text-3" spellcheck="false">Hours Dedicated:&nbsp; {{review.courseload}} </p>
-                <p class="u-text u-text-4" spellcheck="false">Profs and Semester:&nbsp; {{review.professor}}  {{review.semester}} </p>
-                <p class="u-text u-text-5" spellcheck="false">Difficulty:&nbsp; {{review.difficulty}}</p>
-                <p class="u-text u-text-6" spellcheck="false">Roles for:&nbsp;  {{review.industryroles}}</p>
-                <p class="u-text u-text-7" spellcheck="false">Pre req: {{review.prereqs}}</p>
-                <p class="u-text u-text-8" spellcheck="false">{{review.reviews}}</p>
-              </div>
+    <section class="u-align-center u-clearfix u-palette-5-dark-1 u-section-2" id="carousel_01ac">
+      <div class="u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div class="u-container-style u-custom-item u-grey-5 u-list-item u-repeater-item u-shape-rectangle u-list-item-1">
+            <div class="u-container-layout u-similar-container u-valign-bottom-sm u-container-layout-1">
+              <div alt="" class="u-image u-image-circle u-image-1" data-image-width="1000" data-image-height="1500"></div>
+              <h1 class="u-text u-text-default u-text-1">{{ info.profname }}</h1>
+              <h4 class="u-text u-text-2">{{ info.department }}</h4>
+              <a class="u-text u-text-2" href="{{info.pagelink}}">Link to my page</a>
             </div>
-            {% endfor %}
           </div>
         </div>
       </div>
+      <h1 class="u-text u-text-default u-title u-text-3">4.5&nbsp;<span class="u-file-icon u-icon"><img src="images/1040230.png" alt=""></span>
+      </h1>
+      <h5 class="u-align-left u-text u-text-body-alt-color u-text-4">Courses taught: <span style="font-weight: 400;">Programming, Software engineering&nbsp;</span>
+      </h5>
+      <h5 class="u-align-left u-text u-text-body-alt-color u-text-5">Expertise: <span style="font-weight: 400;">NLP, Security</span>
+      </h5>
+      <h5 class="u-align-left u-text u-text-body-alt-color u-text-6">Number of papers published: <span style="font-weight: 400;">45</span>&nbsp;
+      </h5>
     </section>
-    <section class="u-align-center u-clearfix u-gradient u-section-5" id="carousel_ca13">
+    <section class="u-align-center u-clearfix u-gradient u-section-3" id="carousel_ca13">
       <div class="u-clearfix u-sheet u-sheet-1">
-        <h2 class="u-text u-text-default u-text-1">Add Course Review</h2>
-        <p class="u-text u-text-default u-text-2"> Let's help others!</p>
+        <h2 class="u-text u-text-body-alt-color u-text-default u-text-1">Add Professor Review</h2>
+        <p class="u-text u-text-body-alt-color u-text-default u-text-2"> Let's help others!</p>
         <div class="u-align-center u-container-style u-group u-radius-30 u-shape-round u-white u-group-1">
           <div class="u-container-layout u-container-layout-1">
             <div class="u-form u-form-1">
-              <form action="/postcoursereviews" method="POST" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" source="email" name="form" style="padding: 0px;">
+              <form action="/postprofreviews" method="POST" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" source="email" name="form" style="padding: 0px;">
                 <div class="u-form-group u-form-name u-form-group-1">
-                  <label for="name-54fb" class="u-label">Name</label>
-                  <input type="text" placeholder="Enter your Name" id="name-54fb" name="username" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="">
-                </div>
-                <div class="u-form-group u-form-name u-form-group-1">
-                  <label for="name-54fb" class="u-label">Course Name</label>
-                  <input type="text" placeholder="Enter the name of the course" id="name-54fb" name="coursename" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="">
+                  <label for="name-54fb" class="u-label">Professor Name</label>
+                  <input type="text" placeholder="Enter Professor's Name" id="name-54fb" name="profname" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="">
                 </div>
                 <div class="u-form-group u-form-name u-form-group-2">
-                  <label for="name-d598" class="u-label">Professor Name</label>
-                  <input type="text" placeholder="Enter the name of the professor" id="name-d598" name="professor" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="" spellcheck="false">
+                  <label for="name-d598" class="u-label">Course</label>
+                  <input type="text" placeholder="Enter the course taught" id="name-d598" name="classtaken" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="" spellcheck="false">
                 </div>
                 <div class="u-form-group u-form-group-3">
                   <label for="text-5f52" class="u-label">Semester</label>
-                  <input type="text" placeholder="Enter the semester when you took the course" id="text-5f52" name="semester" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10">
+                  <input type="text" placeholder="Enter the semester" id="text-5f52" name="semester" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10">
                 </div>
-                <div class="u-form-group u-form-group-3">
-                  <label for="text-5f52" class="u-label">Courseload</label>
-                  <input type="text" placeholder="Enter the number of hours you took for the course every week" id="text-5f52" name="courseload" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10">
-                </div>
-                <div class="u-form-group u-form-radiobutton u-form-group-4">
-                  <label class="u-label">Difficulty of the Course</label>
-                  <div class="u-form-radio-button-wrapper">
-                    <div class="u-input-row">
-                      <input type="radio" name="difficulty" value=1>
-                      <label class="u-label" for="difficulty">Easy</label>
-                    </div>
-                    <div class="u-input-row">
-                      <input type="radio" name="difficulty" value=2>
-                      <label class="u-label" for="difficulty">Medium Easy</label>
-                    </div>
-                    <div class="u-input-row">
-                      <input type="radio" name="difficulty" value=3>
-                      <label class="u-label" for="difficulty">Medium</label>
-                    </div>
-                    <div class="u-input-row">
-                      <input type="radio" name="difficulty" value=4>
-                      <label class="u-label" for="difficulty">Medium Hard</label>
-                    </div>
-                    <div class="u-input-row">
-                      <input type="radio" name="difficulty" value=5>
-                      <label class="u-label" for="difficulty">Hard</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="u-form-group u-form-rating u-form-group-5">
+                <div class="u-form-group u-form-rating u-form-group-4">
                   <label for="form-rating-e6ef" class="u-label">Rating</label>
                   <div class="u-rating-icons u-spacing-5">
                     <span class="u-active-icon u-form-rating-item u-text-palette-3-base" style="display: none; height: 24px; width: 24px;">
@@ -314,20 +225,12 @@
 	l10.815,5.686c0.526,0.277,1.087,0.417,1.666,0.417c1.057,0,2.059-0.47,2.748-1.288c0.687-0.813,0.964-1.846,0.781-2.904
 	l-2.065-12.042c-0.088-0.513,0.083-1.036,0.456-1.4L48.856,22.73z"></path></svg>
                     </span>
-                    <input type="hidden" id="form-rating-e6ef" name="rank" value="" required="">
+                    <input type="hidden" id="form-rating-e6ef" name="rating" value="" required="">
                   </div>
-                </div>
-                <div class="u-form-group u-form-group-6">
-                  <label for="text-581a" class="u-label">Industry Roles: </label>
-                  <input type="text" placeholder="Enter industry roles that you attained with the help from the course" id="text-581a" name="industryroles" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10">
-                </div>
-                <div class="u-form-group u-form-group-6">
-                  <label for="text-581a" class="u-label">Prerequisites: </label>
-                  <input type="text" placeholder="Enter the prerequisites for the course" id="text-581a" name="prereqs" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10">
                 </div>
                 <div class="u-form-group u-form-message">
                   <label for="message-4c18" class="u-label">Review</label>
-                  <textarea placeholder="Enter your message" rows="4" cols="50" id="message-4c18" name="reviews" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required=""></textarea>
+                  <textarea placeholder="Enter your review" rows="4" cols="50" id="message-4c18" name="reviews" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required=""></textarea>
                 </div>
                 <div class="u-align-right u-form-group u-form-submit">
                   <a href="#" class="u-active-palette-4-light-1 u-border-5 u-border-active-palette-4-light-1 u-border-hover-palette-4-light-1 u-border-palette-4-base u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-4-light-1 u-palette-4-base u-radius-10 u-btn-1">Submit your request</a>
@@ -353,8 +256,8 @@
       <p class="u-text">
         <span>created with</span>
       </p>
-      <a class="u-link" href="" target="_blank">
-        <span>Website Builder Software</span>
+      <a class="u-link" href="https://nicepage.com/html-website-builder" target="_blank">
+        <span>HTML Website Builder</span>
       </a>. 
     </section>
   
