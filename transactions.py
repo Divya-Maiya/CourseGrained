@@ -22,12 +22,18 @@ def get_course_reviews_txn(session, coursename):
     return query.all()
 
 
-def get_course_review_and_info(session, coursename):
-    query = session.query(CourseReviews).\
-        join(CourseCatalog, coursename == CourseReviews.coursename).\
-        filter(CourseReviews.coursename == coursename)
-    return query.all()
+# def get_course_review_and_info(session, course):
+#     query = session.query(CourseReviews).\
+#         join(CourseCatalog, coursename == CourseReviews.coursename).\
+#         filter(CourseReviews.coursename == course)
+#     return query.all()
 
 
 def add_user_interest_txn(session, courseinterest):
     session.add(courseinterest)
+
+def get_course_info_txn(session, coursename):
+    query = session\
+        .query(CourseCatalog)\
+        .filter(CourseCatalog.coursename == coursename)
+    return query.all()

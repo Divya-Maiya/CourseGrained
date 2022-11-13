@@ -6,9 +6,9 @@ client = Client("AC1177934118fec786faba0612d95ed05f", "82166370513078fd73e2302b1
 def sendmessage(body, to):
     message = client.messages \
         .create(
-        body="Join Earth's mightiest heroes. Like Kevin Bacon.",
+        body=body,
         from_='+14793481569',
-        to='+14132109736'
+        to=to
     )
 
     print(message.sid)
