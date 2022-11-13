@@ -134,19 +134,22 @@ def gallprofessors():
 
 @app.route("/postcoursereviews", methods=['POST'])
 def gpostcoursereviews():
+    username = flask.request.values.get("username")
     coursename = flask.request.values.get("coursename")
     professor = flask.request.values.get("professor")
     semester = flask.request.values.get("semester")
-    courseload = flask.request.values.get("courseload")
+    courseload = int(flask.request.values.get("courseload"))
     reviews = flask.request.values.get("reviews")
     industryroles = flask.request.values.get("industryroles")
     prereqs = flask.request.values.get("prereqs")
-    difficulty = flask.request.values.get("difficulty")
-
-    print(coursename, professor, semester, courseload, reviews, industryroles, prereqs, difficulty)
+    difficulty = int(flask.request.values.get("difficulty"))
+    print("---------"*100)
+    print(flask.request.values)
 
     coursereviewsobj.add_course_review(
         CourseReviews(
+            id=str(uuid.uuid4()),
+            username=username,
             coursename=coursename,
             professor=professor,
             semester=semester,
