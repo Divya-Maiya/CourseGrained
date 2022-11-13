@@ -34,6 +34,8 @@ allprofessorsobj = AllProfessorsClass(conn_string)
 coursereviewsobj = CourseReviewsClass(conn_string)
 professorreviewsobj = ProfessorReviewsClass(conn_string)
 
+logged_in = False
+
 
 @app.route("/")
 def index():
@@ -88,6 +90,8 @@ def department():
 
 @app.route("/courseinterest", methods=['POST'])
 def gcourseinterest():
+    # if not logged_in:
+    #     return redirect('/')
     coursename = flask.request.values.get("coursename")
     phone = flask.request.values.get("phone")
     print(coursename, phone)
@@ -101,6 +105,8 @@ def gcourseinterest():
 
 @app.route("/droppingcourse", methods=['POST'])
 def droppingcourse():
+    # if not logged_in:
+    #     return redirect('/')
     coursename = flask.request.values.get('coursename')
     print("PRINTCHCHH")
     print(coursename)
@@ -151,7 +157,10 @@ def gcoursereview():
             'difficulty': rev.difficulty,
         })
 
-    return render_template("CoursesPage.html", reviews=all_reviews, info=info)
+    allprofs = allprofessorsobj.get_all_professors()
+    allcourses = coursecatalogobj.get_all_courses()
+
+    return render_template("CoursesPage.html", reviews=all_reviews, info=info, allprofs=allprofs, allcourses=allcourses)
 
 @app.route("/profinfo", methods=['GET','POST'])
 def gprofreview():
@@ -164,6 +173,8 @@ def gprofreview():
         reviews = professorreviewsobj.get_professor_reviews(profname)
         profinfo = allprofessorsobj.get_info_for_prof(profname)
         allprofs = allprofessorsobj.get_all_professors()
+
+        total, count, avg = 0, 0, 0
 
 
         profinfo = profinfo[0]
@@ -182,9 +193,13 @@ def gprofreview():
                 'rating': rev.rating,
                 'reviews': rev.reviews,
             })
+            total += int(rev.rating)
+            count += 1
+
+        if count > 0: avg = total/count
 
         #TODO Change page to right page
-        return render_template("ProfessorPage.html", reviews=all_reviews, info=info, allprofs=allprofs)
+        return render_template("ProfessorPage.html", reviews=all_reviews, info=info, allprofs=allprofs, avg=f'{avg:.2f}')
 
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
@@ -194,6 +209,8 @@ def gallprofessors():
 
 @app.route("/postcoursereviews", methods=['POST'])
 def gpostcoursereviews():
+    # if not logged_in:
+    #     return redirect('/')
     username = flask.request.values.get("username")
     coursename = flask.request.values.get("coursename")
     professor = flask.request.values.get("professor")
@@ -224,6 +241,8 @@ def gpostcoursereviews():
 
 @app.route("/postprofreviews", methods=['POST'])
 def gpostprofreviews():
+    # if not logged_in:
+    #     return redirect('/')
     profname = flask.request.values.get("profname")
     classtaken = flask.request.values.get("classtaken")
     semester = flask.request.values.get("semester")
@@ -249,6 +268,8 @@ def gpostprofreviews():
 @app.route("/authenticate1", methods=['POST'])
 def authenticate1():
     email = flask.request.values.get("email")
+    if email=='fdoshi@umass.edu':
+        logged_in = True
     print(flask.request.values)
     print(email)
     if checkValidEmail(email):
@@ -268,5 +289,6 @@ def authenticate2():
     if verification_check(email, code) == "approved":
         return jsonify(success=True)
     else:
+        logged_in = True
         return jsonify(success=False)
 

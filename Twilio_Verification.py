@@ -13,8 +13,8 @@ import os
 from twilio.rest import Client
 import re
 
-account_sid = "ACc477c36d89ee5df0d644f9fe57de0369"
-auth_token = "2d895fcadede19d01fdd73d4aa19f7df"
+account_sid = ""
+auth_token = ""
 client = Client(account_sid, auth_token)
 
 
@@ -33,7 +33,7 @@ def get_code():
 def verification(email):
   verification = client.verify \
                      .v2 \
-                     .services('VAd9044e73fa8ffe49d8eb2abb6e8a8f24') \
+                     .services('') \
                      .verifications \
                      .create(to=email, channel='email')
 
@@ -41,7 +41,7 @@ def verification(email):
 def verification_check(email,code):
   verification_check = client.verify \
                            .v2 \
-                           .services('VAd9044e73fa8ffe49d8eb2abb6e8a8f24') \
+                           .services('') \
                            .verification_checks \
                            .create(to=email, code=code)
   return verification_check.status

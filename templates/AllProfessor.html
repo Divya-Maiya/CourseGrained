@@ -44,7 +44,11 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">home</a>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">Home</a>
+
+<ul class="u-nav u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/department" style="padding: 10px 20px;">Courses</a>
+
+<ul class="u-nav u-unstyled u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/allprofessors" style="padding: 10px 20px;">Professors</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -93,7 +97,12 @@
               <form action="/postprofreviews" method="POST" class="u-clearfix u-form-spacing-15 u-form-vertical u-inner-form" source="email" name="form" style="padding: 0px;">
                 <div class="u-form-group u-form-name u-form-group-1">
                   <label for="name-54fb" class="u-label">Professor Name</label>
-                  <input type="text" placeholder="Enter Professor's Name" id="name-54fb" name="profname" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="">
+                  <input type="text" placeholder="Enter Professor's Name" id="name-54fb" name="profname" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="" list="profnames2">
+                  <datalist id="profnames2">
+                    {% for c in allprofs %}
+                    <option value="{{c.profname}}">
+                    {% endfor %}
+                  </datalist>
                 </div>
                 <div class="u-form-group u-form-name u-form-group-2">
                   <label for="name-d598" class="u-label">Course</label>

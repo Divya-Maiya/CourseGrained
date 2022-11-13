@@ -50,7 +50,11 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">home</a>
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/" style="padding: 10px 20px;">Home</a>
+
+<ul class="u-nav u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/department" style="padding: 10px 20px;">Courses</a>
+
+<ul class="u-nav u-unstyled u-nav-3"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="/allprofessors" style="padding: 10px 20px;">Professors</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -177,11 +181,21 @@
                 </div>
                 <div class="u-form-group u-form-name u-form-group-1">
                   <label for="name-54fb" class="u-label">Course Name</label>
-                  <input type="text" placeholder="Enter the name of the course" id="name-54fb" name="coursename" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="">
+                  <input type="text" placeholder="Enter the name of the course" id="name-54fb" name="coursename" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="" list="coursenames2">
+                  <datalist id="coursenames2">
+                    {% for c in allcourses %}
+                    <option value="{{c.coursename}}">
+                    {% endfor %}
+                  </datalist>
                 </div>
                 <div class="u-form-group u-form-name u-form-group-2">
                   <label for="name-d598" class="u-label">Professor Name</label>
-                  <input type="text" placeholder="Enter the name of the professor" id="name-d598" name="professor" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="" spellcheck="false">
+                  <input type="text" placeholder="Enter the name of the professor" id="name-d598" name="professor" class="u-border-2 u-border-palette-4-light-3 u-input u-input-rectangle u-palette-4-light-3 u-radius-10" required="" spellcheck="false" list="profnames2">
+                  <datalist id="profnames2">
+                    {% for c in allprofs %}
+                    <option value="{{c.profname}}">
+                    {% endfor %}
+                  </datalist>
                 </div>
                 <div class="u-form-group u-form-group-3">
                   <label for="text-5f52" class="u-label">Semester</label>
