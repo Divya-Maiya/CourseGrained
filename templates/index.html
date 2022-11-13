@@ -1,7 +1,3 @@
-{%- extends "base.html" %}
-
-{% import "bootstrap/utils.html" as utils %}
-
 {% block content %}
 
 
@@ -16,13 +12,14 @@
     <!-- <link rel="stylesheet" href="nicepage.css" media="screen"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='nicepage.css') }}">
 <!-- <link rel="stylesheet" href="HomePage.css" media="screen"> -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='nicepage.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='HomePage.css') }}" media="screen">
 
     <!-- <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script> -->
+    
+    {% block javascript %}
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}" defer=""></script>
-
-    <!-- <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script> -->
     <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='nicepage.js') }}" defer=""></script>
+    {% endblock %}
 
     <meta name="generator" content="Nicepage 4.21.12, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -127,7 +124,7 @@
                 </div>
                 <div class="u-container-align-center-sm u-container-align-center-xs u-container-style u-layout-cell u-size-14 u-layout-cell-5">
                   <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-valign-top-lg u-valign-top-xl u-container-layout-5">
-                    <img class="u-image u-image-circle u-image-2" src="images/pexels-mohamed-abdelsadig-3196486.jpg" alt="" data-image-width="720" data-image-height="1080">
+                    <img class="u-image u-image-circle u-image-2" src="{{ url_for('static', filename='images/pexels-mohamed-abdelsadig-3196486.jpg') }}" alt="" data-image-width="720" data-image-height="1080">
                   </div>
                 </div>
                 <div class="u-container-style u-hidden-sm u-hidden-xs u-layout-cell u-size-23 u-layout-cell-6">
@@ -142,7 +139,7 @@
                 </div>
                 <div class="u-container-align-center-md u-container-align-center-sm u-container-align-center-xs u-container-style u-layout-cell u-size-14 u-layout-cell-8">
                   <div class="u-container-layout u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-valign-top-lg u-valign-top-xl u-container-layout-8">
-                    <img class="u-image u-image-circle u-image-3" src="images/pexels-harry-shum-12694483.jpg" alt="" data-image-width="1280" data-image-height="855">
+                    <img class="u-image u-image-circle u-image-3" src="{{ url_for('static', filename='images/pexels-harry-shum-12694483.jpg') }}" alt="" data-image-width="1280" data-image-height="855">
                   </div>
                 </div>
                 <div class="u-container-style u-layout-cell u-size-23 u-layout-cell-9">
