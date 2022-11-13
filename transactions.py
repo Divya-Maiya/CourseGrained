@@ -1,4 +1,4 @@
-from models import Score, CourseInterestModel, CourseReviews, CourseCatalog
+from models import Score, CourseInterestModel, CourseReviews, CourseCatalog, ProfessorReviews, Professors
 import uuid
 
 
@@ -21,6 +21,17 @@ def get_course_reviews_txn(session, coursename):
         .filter(CourseReviews.coursename == coursename)
     return query.all()
 
+def get_prof_reviews_txn(session, profname):
+    query = session\
+        .query(ProfessorReviews)\
+        .filter(ProfessorReviews.profname == profname)
+    return query.all()
+
+def get_prof_info_txn(session, profname):
+    query = session\
+        .query(Professors)\
+        .filter(Professors.profname == profname)
+    return query.all()
 
 # def get_course_review_and_info(session, course):
 #     query = session.query(CourseReviews).\

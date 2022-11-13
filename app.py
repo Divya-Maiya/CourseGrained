@@ -5,6 +5,7 @@ from flask import Flask, render_template, url_for
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import redirect
 
+from Twilio_Verification import checkValidEmail, verification, verification_check
 from sendSMS import sendmessage
 from courseinterest import CourseInterest
 from coursecatalog import CourseCatalogClass
@@ -127,6 +128,32 @@ def gcoursereview():
 
     return render_template("CoursesPage.html", reviews=all_reviews, info=info)
 
+@app.route("/profinfo", methods=['GET'])
+def gprofreview():
+    profname = flask.request.args.get('profname')
+
+    reviews = professorreviewsobj.get_professor_reviews(profname)
+    profinfo = allprofessorsobj.get_info_for_prof(profname)
+    profinfo = profinfo[0]
+
+    all_reviews, info = [], {
+        'profname': profinfo.profname,
+        'pagelink': profinfo.pagelink,
+        'department': profinfo.department,
+    }
+
+    for rev in reviews:
+        all_reviews.append({
+            'profname': rev.profname,
+            'classtaken': rev.classtaken,
+            'semester': rev.semester,
+            'rating': rev.rating,
+            'reviews': rev.reviews,
+        })
+
+    #TODO Change page to right page
+    return render_template("CoursesPage.html", reviews=all_reviews, info=info)
+
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
     return allprofessorsobj.get_all_professors()
@@ -160,6 +187,7 @@ def gpostcoursereviews():
             difficulty=difficulty,
         )
     )
+    #TODO Show pop of success/failure and redirect to home page
     return jsonify(success=True)
 
 
@@ -182,4 +210,24 @@ def gpostprofreviews():
             reviews=reviews,
         )
     )
+    # TODO Show pop of success/failure and redirect to home page
     return jsonify(success=True)
+
+@app.route("/authenticate", methods=['GET','POST'])
+def authenticate():
+    if flask.request.method == "POST":
+        email = flask.request.values.get("email")
+        code = flask.request.values.get("code")
+        if verification_check(email, code) == "approved":
+            return "Verification successful"
+        else:
+            return "Incorrect OTP, please retry"
+    else:
+        email = flask.request.values.get("email")
+        if checkValidEmail(email):
+            verification(email)
+
+        else:
+            #TODO Pop yp saying unsuccessful
+            return "Please use your umass.edu email"
+
