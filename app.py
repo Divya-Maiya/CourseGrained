@@ -127,6 +127,31 @@ def gcoursereview():
 
     return render_template("CoursesPage.html", reviews=all_reviews, info=info)
 
+@app.route("/profinfo", methods=['GET'])
+def gprofreview():
+    profname = flask.request.args.get('profname')
+
+    reviews = professorreviewsobj.get_professor_reviews(profname)
+    profinfo = allprofessorsobj.get_info_for_prof(profname)
+    profinfo = profinfo[0]
+
+    all_reviews, info = [], {
+        'profname': profinfo.profname,
+        'pagelink': profinfo.pagelink,
+        'department': profinfo.department,
+    }
+
+    for rev in reviews:
+        all_reviews.append({
+            'profname': rev.profname,
+            'classtaken': rev.classtaken,
+            'semester': rev.semester,
+            'rating': rev.rating,
+            'reviews': rev.reviews,
+        })
+
+    return render_template("CoursesPage.html", reviews=all_reviews, info=info)
+
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
     return allprofessorsobj.get_all_professors()
