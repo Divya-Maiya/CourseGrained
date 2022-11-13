@@ -4,6 +4,8 @@ from flask_bootstrap import Bootstrap
 from werkzeug.utils import redirect
 from leaderboard import Leaderboard
 from courseinterest import CourseInterest
+from coursecatalog import CourseCatalogClass
+from allprofessors import AllProfessorsClass
 from os import environ
 
 from models import Score
@@ -16,7 +18,10 @@ Bootstrap(app)
 
 conn_string = environ.get("DB_URI")
 leaderboard = Leaderboard(conn_string)
+
 courseinterestobj = CourseInterest(conn_string)
+coursecatalogobj = CourseCatalogClass(conn_string)
+allprofessorsobj = AllProfessorsClass(conn_string)
 
 
 @app.route("/")
@@ -48,3 +53,25 @@ def index():
 def gcourseinterest():
     phones = courseinterestobj.get_user_interest_for_course("520")
     print(phones)
+
+
+@app.route("/coursecatalog")
+def gcoursecatalog():
+    return coursecatalogobj.get_all_courses()
+
+
+@app.route("/allprofessors")
+def gallprofessors():
+    return allprofessorsobj.get_all_professors()
+
+# @app.route("/professors")
+# def gcoursecatalog():
+#     print(phones)
+
+# @app.route("/profreviews", method=['POST'])
+# def gprofreviews():
+#     pass
+
+# @app.route("/coursereviews", method=['POST'])
+# def gcoursereviews():
+#     pass

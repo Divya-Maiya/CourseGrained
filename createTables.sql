@@ -8,12 +8,12 @@ USE coursegrained;
 
 DROP TABLE IF EXISTS coursereviews;
 
-CREATE TYPE sem AS ENUM ('Fall 2020', 'Spring 2021', 'Fall 2021', 'Spring 2022', 'Fall 2022');
+-- CREATE TYPE sem AS ENUM ('Fall 2020', 'Spring 2021', 'Fall 2021', 'Spring 2022', 'Fall 2022');
 
 CREATE TABLE coursereviews (
     coursename VARCHAR(200) PRIMARY KEY NOT NULL,
     professor  VARCHAR(100),
-    semester sem,
+    semester VARCHAR(200),
     courseload INTEGER,
     reviews TEXT,
     industryroles VARCHAR(100),
@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS profreviews;
 CREATE TABLE profreviews (
     profname VARCHAR(100) PRIMARY KEY NOT NULL,
     classtaken VARCHAR(200),
-    semester sem,
+    semester VARCHAR(200),
     rating INTEGER,
     reviews TEXT
 );
@@ -35,6 +35,7 @@ DROP TABLE IF EXISTS coursecatalog;
 
 CREATE TABLE coursecatalog (
     coursename VARCHAR(200) PRIMARY KEY NOT NULL,
+    department VARCHAR(200),
     courseurl VARCHAR(200),
     description TEXT
 );
