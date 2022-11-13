@@ -42,6 +42,13 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/department")
+def department():
+    # scores = leaderboard.get_scores()
+    # return render_template("index.html",
+    #                        scores=scores)
+    return render_template("DeptPage.html")
+
 # @app.route("/player", methods=["GET", "POST"])
 # def player():
 #     if flask.request.method == "POST":
