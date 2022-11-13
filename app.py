@@ -6,9 +6,14 @@ from leaderboard import Leaderboard
 from courseinterest import CourseInterest
 from coursecatalog import CourseCatalogClass
 from allprofessors import AllProfessorsClass
+
+from coursereviews import CourseReviewsClass
+from professorreviews import ProfessorReviewsClass
+
+from flask import jsonify
 from os import environ
 
-from models import Score
+from models import Score, ProfessorReviews, CourseReviews
 
 DEFAULT_ROUTE_LEADERBOARD = "index"
 DEFAULT_ROUTE_PLAYER = "player"
@@ -23,13 +28,16 @@ courseinterestobj = CourseInterest(conn_string)
 coursecatalogobj = CourseCatalogClass(conn_string)
 allprofessorsobj = AllProfessorsClass(conn_string)
 
+coursereviewsobj = CourseReviewsClass(conn_string)
+professorreviewsobj = ProfessorReviewsClass(conn_string)
+
 
 @app.route("/")
 def index():
     # scores = leaderboard.get_scores()
     # return render_template("index.html",
     #                        scores=scores)
-    return "Hi"
+    return render_template("index.html")
 
 # @app.route("/player", methods=["GET", "POST"])
 # def player():
@@ -55,23 +63,61 @@ def gcourseinterest():
     print(phones)
 
 
-@app.route("/coursecatalog")
+@app.route("/coursecatalog", methods=['GET'])
 def gcoursecatalog():
     return coursecatalogobj.get_all_courses()
 
 
-@app.route("/allprofessors")
+@app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
     return allprofessorsobj.get_all_professors()
 
-# @app.route("/professors")
-# def gcoursecatalog():
-#     print(phones)
 
-# @app.route("/profreviews", method=['POST'])
-# def gprofreviews():
-#     pass
+@app.route("/postcoursereviews", methods=['POST'])
+def gpostcoursereviews():
+    coursename = flask.request.values.get("coursename")
+    professor = flask.request.values.get("professor")
+    semester = flask.request.values.get("semester")
+    courseload = flask.request.values.get("courseload")
+    reviews = flask.request.values.get("reviews")
+    industryroles = flask.request.values.get("industryroles")
+    prereqs = flask.request.values.get("prereqs")
+    difficulty = flask.request.values.get("difficulty")
 
-# @app.route("/coursereviews", method=['POST'])
-# def gcoursereviews():
-#     pass
+    print(coursename, professor, semester, courseload, reviews, industryroles, prereqs, difficulty)
+
+    coursereviewsobj.add_course_review(
+        CourseReviews(
+            coursename=coursename, 
+            professor=professor, 
+            semester=semester,
+            courseload=courseload,
+            reviews=reviews,
+            industryroles=industryroles,
+            prereqs=prereqs,
+            difficulty=difficulty,
+        )
+    )
+    return jsonify(success=True)
+
+
+@app.route("/postprofreviews", methods=['POST'])
+def gpostprofreviews():
+    profname = flask.request.values.get("profname")
+    classtaken = flask.request.values.get("classtaken")
+    semester = flask.request.values.get("semester")
+    rating = flask.request.values.get("rating")
+    reviews = flask.request.values.get("reviews")
+
+    print(profname, classtaken, semester, rating, reviews)
+
+    professorreviewsobj.add_professor_review(
+        ProfessorReviews(
+            profname=profname, 
+            classtaken=classtaken, 
+            semester=semester,
+            rating=rating,
+            reviews=reviews,
+        )
+    )
+    return jsonify(success=True)

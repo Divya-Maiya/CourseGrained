@@ -1,7 +1,7 @@
 from cockroachdb.sqlalchemy import run_transaction
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from transactions import get_scores_txn, add_score_txn
+from transactions import get_scores_txn
 
 class Leaderboard:
     def __init__(self, conn_string):

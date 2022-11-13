@@ -37,26 +37,25 @@ class Professors(Base):
     department = Column(VARCHAR)
 
 
-# class CourseReviews(Base):
-#     __tablename__ = 'coursereviews'
-#     id = Column(UUID, primary_key=True)
+class CourseReviews(Base):
+    __tablename__ = 'coursereviews'
+    id = Column(UUID, primary_key=True)
+    coursename = Column(VARCHAR)
+    professor = Column(VARCHAR)
+    semester = Column(VARCHAR)
+    courseload = Column(INT)
+    reviews = Column(VARCHAR)
+    industryroles = Column(VARCHAR)
+    prereqs = Column(VARCHAR)
+    difficulty = Column(INT)
 
-#     coursename = Column(VARCHAR)
-#     professor = Column(VARCHAR)
-#     semester = Column(VARCHAR)
-#     courseload = Column(INT)
-#     reviews = Column(VARCHAR)
-#     industryroles = Column(VARCHAR)
-#     prereqs = Column(VARCHAR)
-#     difficulty = Column(INT)
 
-
-# class ProfessorREVIEWS(Base):
-#     __tablename__ = 'profreviews'
-    
-#     profname = Column(VARCHAR)
-#     classtaken = Column(VARCHAR)
-#     semester = Column(VARCHAR)
-#     rating = Column(INT)
-#     reviews = Column(VARCHAR)
+class ProfessorReviews(Base):
+    __tablename__ = 'profreviews'
+    id = Column(UUID, primary_key=True)
+    profname = Column(VARCHAR)
+    classtaken = Column(VARCHAR)
+    semester = Column(VARCHAR)
+    rating = Column(INT)
+    reviews = Column(VARCHAR)
 

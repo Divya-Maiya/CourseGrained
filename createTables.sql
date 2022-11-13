@@ -11,7 +11,8 @@ DROP TABLE IF EXISTS coursereviews;
 -- CREATE TYPE sem AS ENUM ('Fall 2020', 'Spring 2021', 'Fall 2021', 'Spring 2022', 'Fall 2022');
 
 CREATE TABLE coursereviews (
-    coursename VARCHAR(200) PRIMARY KEY NOT NULL,
+    id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+    coursename VARCHAR(200),
     professor  VARCHAR(100),
     semester VARCHAR(200),
     courseload INTEGER,
@@ -24,7 +25,8 @@ CREATE TABLE coursereviews (
 DROP TABLE IF EXISTS profreviews;
 
 CREATE TABLE profreviews (
-    profname VARCHAR(100) PRIMARY KEY NOT NULL,
+    id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+    profname VARCHAR(100),
     classtaken VARCHAR(200),
     semester VARCHAR(200),
     rating INTEGER,
