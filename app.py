@@ -83,7 +83,13 @@ def gcoursecatalog():
 @app.route("/courseinfo", methods=['GET'])
 def gcoursereview():
     coursename = flask.request.args.get('coursename')
-    return coursereviewsobj.get_course_info(coursename)
+    print(coursename)
+    data =  coursereviewsobj.get_course_info('520:Introduction to Software Engineering Practices')
+    a = []
+    for x in data:
+        print(x.coursename)
+        print(x.professor)
+    return render_template("CoursesPage.html", data=data)
 
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():

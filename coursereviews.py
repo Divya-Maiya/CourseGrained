@@ -8,7 +8,7 @@ from transactions import add_user_interest_txn, get_user_interest_txn, get_cours
 class CourseReviewsClass:
     def __init__(self, conn_string):
         self.engine = create_engine(conn_string, convert_unicode=True)
-        self.sessionmaker = sessionmaker(bind=self.engine)
+        self.sessionmaker = sessionmaker(bind=self.engine, expire_on_commit=False)
 
     def add_course_review(self, coursereview):
         run_transaction(self.sessionmaker,
