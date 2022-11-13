@@ -1,5 +1,5 @@
 .u-section-1 {
-  background-image: url("np://user.desktop.nicepage.com/Site_669605537/images/jh.jpg?rand=998c");
+  background-image: url("images/jh.jpg");
   background-position: 50% 50%;
   min-height: 686px;
 }
@@ -16,7 +16,7 @@
 }
 
 .u-section-1 .u-container-layout-1 {
-  padding: 40px 0;
+  padding: 40px 0 40px 40px;
 }
 
 .u-section-1 .u-text-1 {
@@ -50,7 +50,7 @@
 .u-section-1 .u-image-1 {
   min-height: 686px;
   pointer-events: auto;
-  background-image: url("np://user.desktop.nicepage.com/Site_669605537/images/5807340-min.png?rand=be4d");
+  background-image: url("images/5807340-min.png");
   background-position: 50% 50%;
 }
 
@@ -203,7 +203,7 @@
   min-height: 310px;
   height: auto;
   width: 310px;
-  background-image: url("np://user.desktop.nicepage.com/Site_669605537/images/pexels-mohamed-abdelsadig-3196486.jpg?rand=10f7");
+  background-image: url("images/pexels-mohamed-abdelsadig-3196486.jpg");
   background-position: 50% 50%;
   margin: 0 auto 0 26px;
 }

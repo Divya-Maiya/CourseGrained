@@ -45,10 +45,22 @@ def index():
 
 @app.route("/department")
 def department():
+    all_c = coursecatalogobj.get_all_courses()
+
+    courses = []
+    for c in all_c:
+        courses.append({
+            'coursename': c.coursename,
+            'department': c.department,
+            'courseurl': c.courseurl,
+            'description': c.description,
+        })
+
+    print(courses)
     # scores = leaderboard.get_scores()
     # return render_template("index.html",
     #                        scores=scores)
-    return render_template("DeptPage.html")
+    return render_template("DeptPage.html", courses=courses)
 
 # @app.route("/player", methods=["GET", "POST"])
 # def player():
@@ -218,21 +230,27 @@ def gpostprofreviews():
     # TODO Show pop of success/failure and redirect to home page
     return jsonify(success=True)
 
-@app.route("/authenticate", methods=['GET','POST'])
-def authenticate():
-    if flask.request.method == "POST":
-        email = flask.request.values.get("email")
-        code = flask.request.values.get("code")
-        if verification_check(email, code) == "approved":
-            return "Verification successful"
-        else:
-            return "Incorrect OTP, please retry"
+@app.route("/authenticate1", methods=['POST'])
+def authenticate1():
+    email = flask.request.values.get("email")
+    print(flask.request.values)
+    print(email)
+    if checkValidEmail(email):
+        verification(email)
+        return jsonify(success=False)
     else:
-        email = flask.request.values.get("email")
-        if checkValidEmail(email):
-            verification(email)
+        #TODO Pop yp saying unsuccessful
+        return jsonify(success=False)
 
-        else:
-            #TODO Pop yp saying unsuccessful
-            return "Please use your umass.edu email"
+
+@app.route("/authenticate2", methods=['POST'])
+def authenticate2():
+    email = flask.request.values.get("email")
+    code = flask.request.values.get("code")
+    email = 'dmaiya@umass.edu'
+    print(email, code)
+    if verification_check(email, code) == "approved":
+        return jsonify(success=True)
+    else:
+        return jsonify(success=False)
 
