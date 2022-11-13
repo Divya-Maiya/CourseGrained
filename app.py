@@ -1,8 +1,9 @@
+import uuid
+
 import flask
 from flask import Flask, render_template, url_for
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import redirect
-from leaderboard import Leaderboard
 from courseinterest import CourseInterest
 from coursecatalog import CourseCatalogClass
 from allprofessors import AllProfessorsClass
@@ -13,7 +14,7 @@ from professorreviews import ProfessorReviewsClass
 from flask import jsonify
 from os import environ
 
-from models import Score, ProfessorReviews, CourseReviews
+from models import ProfessorReviews, CourseReviews, CourseInterestModel
 
 DEFAULT_ROUTE_LEADERBOARD = "index"
 DEFAULT_ROUTE_PLAYER = "player"
@@ -22,7 +23,6 @@ app = Flask(__name__)
 Bootstrap(app)
 
 conn_string = environ.get("DB_URI")
-leaderboard = Leaderboard(conn_string)
 
 courseinterestobj = CourseInterest(conn_string)
 coursecatalogobj = CourseCatalogClass(conn_string)
@@ -64,16 +64,26 @@ def department():
 #         return render_template("player.html", score=score, avatars=avatars)
 
 
-@app.route("/courseinterest")
+@app.route("/courseinterest", methods=['POST'])
 def gcourseinterest():
-    phones = courseinterestobj.get_user_interest_for_course("520")
-    print(phones)
+    coursename = flask.request.values.get("coursename")
+    phone = flask.request.values.get("phone")
+    courseinterestobj.add_user_interest(
+        CourseInterestModel(id=str(
+            uuid.uuid4()), coursename=coursename, phone=phone))
+
+    #TODO POP Up saying thank's for registering interest
+    return render_template("index.html")
 
 
 @app.route("/coursecatalog", methods=['GET'])
 def gcoursecatalog():
     return coursecatalogobj.get_all_courses()
 
+@app.route("/courseinfo", methods=['GET'])
+def gcoursereview():
+    coursename = flask.request.args.get('coursename')
+    return coursereviewsobj.get_course_info(coursename)
 
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
