@@ -1,7 +1,8 @@
 from cockroachdb.sqlalchemy import run_transaction
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from transactions import add_user_interest_txn, get_user_interest_txn
+from transactions import add_user_interest_txn, get_user_interest_txn, get_course_reviews_txn, \
+    get_course_review_and_info
 
 
 class CourseReviewsClass:
@@ -15,7 +16,8 @@ class CourseReviewsClass:
 
     def get_course_reviews(self, course):
         return run_transaction(self.sessionmaker,
-                               lambda session: self.get_user_interest(session, course))
+                               lambda session: get_course_reviews_txn(session, course))
 
-    def get_user_interest(self, session, course):
-        return get_user_interest_txn(session, course)
+    def get_course_info(self, course):
+        return run_transaction(self.sessionmaker,
+                               lambda session: get_course_review_and_info(session, course))
