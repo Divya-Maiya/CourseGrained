@@ -16,7 +16,3 @@ class CourseReviewsClass:
     def get_course_reviews(self, course):
         return run_transaction(self.sessionmaker,
                                lambda session: get_course_reviews_txn(session, course))
-
-    def get_course_info(self, course):
-        return run_transaction(self.sessionmaker,
-                               lambda session: get_course_review_and_info(session, course))
