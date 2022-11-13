@@ -4,6 +4,8 @@ import flask
 from flask import Flask, render_template, url_for
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import redirect
+
+from sendSMS import sendmessage
 from courseinterest import CourseInterest
 from coursecatalog import CourseCatalogClass
 from allprofessors import AllProfessorsClass
@@ -39,6 +41,7 @@ def index():
     #                        scores=scores)
     return render_template("index.html")
 
+
 # @app.route("/player", methods=["GET", "POST"])
 # def player():
 #     if flask.request.method == "POST":
@@ -65,7 +68,20 @@ def gcourseinterest():
         CourseInterestModel(id=str(
             uuid.uuid4()), coursename=coursename, phone=phone))
 
-    #TODO POP Up saying thank's for registering interest
+    # TODO POP Up saying thank's for registering interest
+    return render_template("index.html")
+
+
+@app.route("/droppingcourse", methods=['GET'])
+def droppingcourse():
+    coursename = flask.request.args.get('coursename')
+    phones = courseinterestobj.get_user_interest_for_course(coursename)
+
+    body = f"Course {coursename} may become available soon. Please check."
+    for phone in phones:
+        sendmessage(body, "+1" + phone.phone)
+
+    # TODO POP Up saying thank's
     return render_template("index.html")
 
 
@@ -73,10 +89,22 @@ def gcourseinterest():
 def gcoursecatalog():
     return coursecatalogobj.get_all_courses()
 
+
 @app.route("/courseinfo", methods=['GET'])
 def gcoursereview():
-    coursename = flask.request.args.get('coursename')
-    return coursereviewsobj.get_course_info(coursename)
+    # coursename = flask.request.args.get('coursename')
+    coursename = "520:Introduction to Software Engineering Practices"
+    reviews = coursereviewsobj.get_course_reviews(coursename)
+    info = coursecatalogobj.get_for_course(coursename)
+
+    for rev in reviews:
+        print(rev.professor)
+
+    for i in info:
+        print(info.department)
+
+    # return coursereviewsobj.get_course_info(coursename)
+
 
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
@@ -98,8 +126,8 @@ def gpostcoursereviews():
 
     coursereviewsobj.add_course_review(
         CourseReviews(
-            coursename=coursename, 
-            professor=professor, 
+            coursename=coursename,
+            professor=professor,
             semester=semester,
             courseload=courseload,
             reviews=reviews,
@@ -123,8 +151,8 @@ def gpostprofreviews():
 
     professorreviewsobj.add_professor_review(
         ProfessorReviews(
-            profname=profname, 
-            classtaken=classtaken, 
+            profname=profname,
+            classtaken=classtaken,
             semester=semester,
             rating=rating,
             reviews=reviews,
