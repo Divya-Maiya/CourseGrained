@@ -5,6 +5,7 @@ from flask import Flask, render_template, url_for
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import redirect
 
+from Twilio_Verification import checkValidEmail, verification, verification_check
 from sendSMS import sendmessage
 from courseinterest import CourseInterest
 from coursecatalog import CourseCatalogClass
@@ -208,3 +209,22 @@ def gpostprofreviews():
     )
     # TODO Show pop of success/failure and redirect to home page
     return jsonify(success=True)
+
+@app.route("/authenticate", methods=['GET','POST'])
+def authenticate():
+    if flask.request.method == "POST":
+        email = flask.request.values.get("email")
+        code = flask.request.values.get("code")
+        if verification_check(email, code) == "approved":
+            return "Verification successful"
+        else:
+            return "Incorrect OTP, please retry"
+    else:
+        email = flask.request.values.get("email")
+        if checkValidEmail(email):
+            verification(email)
+
+        else:
+            #TODO Pop yp saying unsuccessful
+            return "Please use your umass.edu email"
+

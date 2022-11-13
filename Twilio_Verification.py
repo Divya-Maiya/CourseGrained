@@ -46,8 +46,13 @@ def verification_check(email,code):
                            .create(to=email, code=code)
   return verification_check.status
 
-email = get_email()
-if(bool(re.match(r"^[A-Za-z0-9._%+-]+@umass\.edu$", email))):
-  verification(email)
-  status = verification_check(email,get_code())
-  print(status)
+# email = get_email()
+
+def checkValidEmail(email):
+    if(bool(re.match(r"^[A-Za-z0-9._%+-]+@umass\.edu$", email))):
+        return True
+    else:
+        return False
+# verification(email)
+# status = verification_check(email,get_code())
+# print(status)
