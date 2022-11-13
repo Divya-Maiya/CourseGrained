@@ -11,16 +11,24 @@
     <meta name="keywords" content="Student reviews">
     <meta name="description" content="">
     <title>CoursesPage</title>
-    <link rel="stylesheet" href="nicepage.css" media="screen">
-<link rel="stylesheet" href="CoursesPage.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+
+    <!-- <link rel="stylesheet" href="nicepage.css" media="screen"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='nicepage.css') }}" media="screen">
+<!-- <link rel="stylesheet" href="HomePage.css" media="screen"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='CoursesPage.css') }}" media="screen">
+
+    {% block javascript %}
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='nicepage.js') }}" defer=""></script>
+    {% endblock %}
+
+    <!-- <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+
+
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script> -->
+
     <meta name="generator" content="Nicepage 4.21.12, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    
-    
-    
-    
     
     
     <script type="application/ld+json">{
@@ -60,13 +68,14 @@
     <section class="u-align-center u-clearfix u-section-1" id="sec-8b61">
       <div class="u-container-style u-expanded-width u-group u-palette-4-dark-2 u-group-1">
         <div class="u-container-layout u-container-layout-1">
-          <h2 class="u-align-center u-text u-text-1" spellcheck="false">689: Machine Learning<br>
-            <span style="font-size: 1.25rem;">Computer Science</span>
+          <h2 class="u-align-center u-text u-text-1" spellcheck="false">{{info.coursename}}<br>
+            <span style="font-size: 1.25rem;">{{info.department}}</span>
           </h2>
+          
           <div class="u-border-3 u-border-palette-3-base u-line u-line-horizontal u-line-1"></div>
-          <p class="u-align-center u-text u-text-2">Paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id suscipit ex. Suspendisse rhoncus laoreet purus quis elementum. Phasellus <a href="" class="u-border-1 u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-style u-none u-text-body-alt-color u-text-hover-palette-3-base u-btn-1">sed efficitur</a> dolor, et ultricies sapien. Quisque fringilla sit amet dolor commodo efficitur.
-                Aliquam et sem odio. In ullamcorper nisi nunc, et molestie ipsum iaculis sit amet. 
+          <p class="u-align-center u-text u-text-2">{{info.description}}
           </p>
+          <p class="u-align-center u-text u-text-2"><a href={{info.courseurl}}>Link to the Course Page</a></p>
         </div>
       </div>
     </section>
@@ -132,30 +141,20 @@
         </h2>
         <div class="u-list u-list-1">
           <div class="u-repeater u-repeater-1">
+            {% for review in reviews %}
             <div class="u-container-style u-list-item u-repeater-item u-shape-rectangle">
               <div class="u-container-layout u-similar-container u-valign-bottom-sm u-container-layout-1">
                 <div alt="" class="u-image u-image-circle u-image-1" data-image-width="1056" data-image-height="1500"></div>
-                <h6 class="u-text u-text-default u-text-2">mike perry</h6><span class="u-file-icon u-icon u-icon-1"><img src="images/2107957.png" alt=""></span><span class="u-file-icon u-icon u-icon-2"><img src="images/2107957.png" alt=""></span>
-                <p class="u-text u-text-3" spellcheck="false">Hours Dedicated:&nbsp;</p>
-                <p class="u-text u-text-4" spellcheck="false">Profs and Semester:&nbsp;</p>
-                <p class="u-text u-text-5" spellcheck="false">Difficulty:&nbsp;</p>
-                <p class="u-text u-text-6" spellcheck="false">Roles for:&nbsp;</p>
-                <p class="u-text u-text-7" spellcheck="false">Pre req: Probability,Linear Algebra</p>
-                <p class="u-text u-text-8" spellcheck="false">"Aenean pulvinar dui ornare, feugiat lorem non, ultrices justo. Mauris efficitur, mauris in auctor euismod, quam elit ultrices urna, eget eleifend arcu risus id metus. Maecenas ex enim, mattis eu velit vitae, blandit mattis sapien. Sed aliquam leo et semper vestibulum."</p>
+                <h6 class="u-text u-text-default u-text-2">{{review.username}}</h6><span class="u-file-icon u-icon u-icon-1"><img src="{{ url_for('static', filename='images/2107957.png') }}" alt=""></span><span class="u-file-icon u-icon u-icon-2"><img src="{{ url_for('static', filename='images/2107957.png') }}" alt=""></span>
+                <p class="u-text u-text-3" spellcheck="false">Hours Dedicated:&nbsp; {{review.courseload}} </p>
+                <p class="u-text u-text-4" spellcheck="false">Profs and Semester:&nbsp; {{review.professor}}  {{review.semester}} </p>
+                <p class="u-text u-text-5" spellcheck="false">Difficulty:&nbsp; {{review.difficulty}}</p>
+                <p class="u-text u-text-6" spellcheck="false">Roles for:&nbsp;  {{review.industryroles}}</p>
+                <p class="u-text u-text-7" spellcheck="false">Pre req: {{review.prereqs}}</p>
+                <p class="u-text u-text-8" spellcheck="false">{{review.reviews}}</p>
               </div>
             </div>
-            <div class="u-container-style u-custom-item u-grey-5 u-list-item u-repeater-item u-shape-rectangle u-list-item-2">
-              <div class="u-container-layout u-similar-container u-valign-bottom-sm u-container-layout-2">
-                <div alt="" class="u-image u-image-circle u-image-2" data-image-width="1000" data-image-height="1500"></div>
-                <h6 class="u-text u-text-default u-text-9">linda hudson</h6><span class="u-file-icon u-icon u-icon-3"><img src="images/2107957.png" alt=""></span><span class="u-file-icon u-icon u-icon-4"><img src="images/2107957.png" alt=""></span>
-                <p class="u-text u-text-10" spellcheck="false">Roles for:&nbsp;</p>
-                <p class="u-text u-text-11" spellcheck="false">Roles for:&nbsp;</p>
-                <p class="u-text u-text-12" spellcheck="false">Roles for:&nbsp;</p>
-                <p class="u-text u-text-13" spellcheck="false">Pre req</p>
-                <p class="u-text u-text-14" spellcheck="false">"Aenean pulvinar dui ornare, feugiat lorem non, ultrices justo. Mauris efficitur, mauris in auctor euismod, quam elit ultrices urna, eget eleifend arcu risus id metus. Maecenas ex enim, mattis eu velit vitae, blandit mattis sapien. Sed aliquam leo et semper vestibulum."</p>
-                <p class="u-text u-text-15">"Aenean pulvinar dui ornare, feugiat lorem non, ultrices justo. Mauris efficitur, mauris in auctor euismod, quam elit ultrices urna, eget eleifend arcu risus id metus. Maecenas ex enim, mattis eu velit vitae, blandit mattis sapien. Sed aliquam leo et semper vestibulum."</p>
-              </div>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>

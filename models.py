@@ -40,6 +40,7 @@ class Professors(Base):
 class CourseReviews(Base):
     __tablename__ = 'coursereviews'
     id = Column(UUID, primary_key=True)
+    username = Column(VARCHAR)
     coursename = Column(VARCHAR)
     professor = Column(VARCHAR)
     semester = Column(VARCHAR)

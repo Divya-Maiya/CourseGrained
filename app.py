@@ -99,21 +99,33 @@ def gcoursecatalog():
 
 @app.route("/courseinfo", methods=['GET'])
 def gcoursereview():
-    #TODO uncomment
+    coursename = flask.request.args.get('coursename')
 
-    # coursename = flask.request.args.get('coursename')
-    coursename = "520:Introduction to Software Engineering Practices"
     reviews = coursereviewsobj.get_course_reviews(coursename)
-    info = coursecatalogobj.get_for_course(coursename)
+    cataloginfo = coursecatalogobj.get_for_course(coursename)
+    cataloginfo = cataloginfo[0]
+
+    all_reviews, info = [], {
+        'coursename': cataloginfo.coursename,
+        'department': cataloginfo.department,
+        'courseurl': cataloginfo.courseurl,
+        'description': cataloginfo.description,
+    }
 
     for rev in reviews:
-        print(rev.professor)
+        all_reviews.append({
+            'username': rev.username,
+            'coursename': rev.coursename,
+            'professor': rev.professor,
+            'semester': rev.semester,
+            'courseload': rev.courseload,
+            'reviews': rev.reviews,
+            'industryroles': rev.industryroles,
+            'prereqs': rev.prereqs,
+            'difficulty': rev.difficulty,
+        })
 
-    for i in info:
-        print(i.department)
-
-    # return coursereviewsobj.get_course_info(coursename)
-
+    return render_template("CoursesPage.html", reviews=all_reviews, info=info)
 
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
