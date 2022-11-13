@@ -50,7 +50,8 @@ CREATE TABLE professors (
 DROP TABLE IF EXISTS courseinterest;
 
 CREATE TABLE courseinterest (
-    coursename VARCHAR(200) PRIMARY KEY NOT NULL,
+    id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+    coursename VARCHAR(200),
     emailID VARCHAR(200),
     phone CHAR(10)
 );

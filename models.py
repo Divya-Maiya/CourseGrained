@@ -13,9 +13,10 @@ class Score(Base):
     points = Column(INT)
 
 
-class CourseInterest(Base):
+class CourseInterestModel(Base):
     __tablename__ = 'courseinterest'
-    coursename = Column(VARCHAR, primary_key=True)
-    emailID = Column(VARCHAR)
+    id = Column(UUID, primary_key=True)
+    coursename = Column(VARCHAR)
+    emailid = Column(VARCHAR)
     phone = Column(CHAR)
 
