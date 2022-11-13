@@ -268,7 +268,28 @@
 .u-section-4 .u-icon-2 {
   width: 31px;
   height: 31px;
-  margin: -29px 0 0 147px;
+  margin: -31px 0 0 147px;
+  padding: 0;
+}
+
+.u-section-4 .u-icon-3 {
+  width: 31px;
+  height: 31px;
+  margin: -62px 0 0 100px;
+  padding: 0;
+}
+
+.u-section-4 .u-icon-4 {
+  width: 31px;
+  height: 31px;
+  margin: -93px 0 0 60;
+  padding: 0;
+}
+
+.u-section-4 .u-icon-5 {
+  width: 31px;
+  height: 31px;
+  margin: -124px 0 0 147px;
   padding: 0;
 }
 

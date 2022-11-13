@@ -75,7 +75,7 @@
           <div class="u-border-3 u-border-palette-3-base u-line u-line-horizontal u-line-1"></div>
           <p class="u-align-center u-text u-text-2">{{info.description}}
           </p>
-          <p class="u-align-center u-text u-text-2"><a href={{info.courseurl}}>Link to the Course Page</a></p>
+          <h3 class="u-align-center u-text u-text-2"><a href={{info.courseurl}}>Link to the Course Page</a></h3>
         </div>
       </div>
     </section>
@@ -144,12 +144,17 @@
             <div class="u-container-style u-list-item u-repeater-item u-shape-rectangle">
               <div class="u-container-layout u-similar-container u-valign-bottom-sm u-container-layout-1">
                 <div alt="" class="u-image u-image-circle u-image-1" data-image-width="1056" data-image-height="1500"></div>
-                <h6 class="u-text u-text-default u-text-2">{{review.username}}</h6><span class="u-file-icon u-icon u-icon-1"><img src="{{ url_for('static', filename='images/2107957.png') }}" alt=""></span><span class="u-file-icon u-icon u-icon-2"><img src="{{ url_for('static', filename='images/2107957.png') }}" alt=""></span>
-                <p class="u-text u-text-3" spellcheck="false">Hours Dedicated:&nbsp; {{review.courseload}} </p>
-                <p class="u-text u-text-4" spellcheck="false">Profs and Semester:&nbsp; {{review.professor}}  {{review.semester}} </p>
-                <p class="u-text u-text-5" spellcheck="false">Difficulty:&nbsp; {{review.difficulty}}</p>
-                <p class="u-text u-text-6" spellcheck="false">Roles for:&nbsp;  {{review.industryroles}}</p>
-                <p class="u-text u-text-7" spellcheck="false">Pre req: {{review.prereqs}}</p>
+                <h6 class="u-text u-text-default u-text-2">{{review.username}}</h6>
+
+                {% for n in range(review.difficulty) %}
+                <span class="u-file-icon u-icon u-icon-{{n+1}}"><img src="{{ url_for('static', filename='images/2107957.png') }}" alt=""></span>
+                {% endfor %}
+
+                <p class="u-text u-text-3" spellcheck="false"><b>Hours Dedicated:</b>&nbsp; {{review.courseload}} </p>
+                <p class="u-text u-text-4" spellcheck="false"><b>Profs and Semester:</b>&nbsp; {{review.professor}} | {{review.semester}} </p>
+                <p class="u-text u-text-5" spellcheck="false"><b>Difficulty:</b>&nbsp; {{review.difficulty}}</p>
+                <p class="u-text u-text-6" spellcheck="false"><b>Roles for:</b>&nbsp;  {{review.industryroles}}</p>
+                <p class="u-text u-text-7" spellcheck="false"><b>Prerequisites</b>: {{review.prereqs}}</p>
                 <p class="u-text u-text-8" spellcheck="false">{{review.reviews}}</p>
               </div>
             </div>

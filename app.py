@@ -40,7 +40,13 @@ def index():
     # scores = leaderboard.get_scores()
     # return render_template("index.html",
     #                        scores=scores)
-    return render_template("index.html")
+    all_c = coursecatalogobj.get_all_courses()
+
+    courses = []
+    for c in all_c:
+        courses.append(c.coursename)
+
+    return render_template("index.html", courses=courses)
 
 
 @app.route("/department")
@@ -113,20 +119,24 @@ def gcoursecatalog():
     return coursecatalogobj.get_all_courses()
 
 
-@app.route("/courseinfo", methods=['GET'])
+@app.route("/courseinfo", methods=['GET', 'POST'])
 def gcoursereview():
-    coursename = flask.request.args.get('coursename')
+    if flask.request.method == "POST":
+        coursename = flask.request.values.get("coursename")
+        print(coursename)
+        return redirect(f"/courseinfo?coursename={coursename}")
+    else:
+        coursename = flask.request.args.get('coursename')
+        reviews = coursereviewsobj.get_course_reviews(coursename)
+        cataloginfo = coursecatalogobj.get_for_course(coursename)
+        cataloginfo = cataloginfo[0]
 
-    reviews = coursereviewsobj.get_course_reviews(coursename)
-    cataloginfo = coursecatalogobj.get_for_course(coursename)
-    cataloginfo = cataloginfo[0]
-
-    all_reviews, info = [], {
-        'coursename': cataloginfo.coursename,
-        'department': cataloginfo.department,
-        'courseurl': cataloginfo.courseurl,
-        'description': cataloginfo.description,
-    }
+        all_reviews, info = [], {
+            'coursename': cataloginfo.coursename,
+            'department': cataloginfo.department,
+            'courseurl': cataloginfo.courseurl,
+            'description': cataloginfo.description,
+        }
 
     for rev in reviews:
         all_reviews.append({
@@ -143,35 +153,43 @@ def gcoursereview():
 
     return render_template("CoursesPage.html", reviews=all_reviews, info=info)
 
-@app.route("/profinfo", methods=['GET'])
+@app.route("/profinfo", methods=['GET','POST'])
 def gprofreview():
-    profname = flask.request.args.get('profname')
+    if flask.request.method == "POST":
+        profname = flask.request.values.get("profname")
+        return redirect(f"/profinfo?profname={profname}")
+    else:
+        profname = flask.request.args.get('profname')
 
-    reviews = professorreviewsobj.get_professor_reviews(profname)
-    profinfo = allprofessorsobj.get_info_for_prof(profname)
-    profinfo = profinfo[0]
+        reviews = professorreviewsobj.get_professor_reviews(profname)
+        profinfo = allprofessorsobj.get_info_for_prof(profname)
+        allprofs = allprofessorsobj.get_all_professors()
 
-    all_reviews, info = [], {
-        'profname': profinfo.profname,
-        'pagelink': profinfo.pagelink,
-        'department': profinfo.department,
-    }
 
-    for rev in reviews:
-        all_reviews.append({
-            'profname': rev.profname,
-            'classtaken': rev.classtaken,
-            'semester': rev.semester,
-            'rating': rev.rating,
-            'reviews': rev.reviews,
-        })
+        profinfo = profinfo[0]
 
-    #TODO Change page to right page
-    return render_template("ProfessorPage.html", reviews=all_reviews, info=info)
+        all_reviews, info = [], {
+            'profname': profinfo.profname,
+            'pagelink': profinfo.pagelink,
+            'department': profinfo.department,
+        }
+
+        for rev in reviews:
+            all_reviews.append({
+                'profname': rev.profname,
+                'classtaken': rev.classtaken,
+                'semester': rev.semester,
+                'rating': rev.rating,
+                'reviews': rev.reviews,
+            })
+
+        #TODO Change page to right page
+        return render_template("ProfessorPage.html", reviews=all_reviews, info=info, allprofs=allprofs)
 
 @app.route("/allprofessors", methods=['GET'])
 def gallprofessors():
-    return allprofessorsobj.get_all_professors()
+    allprofs = allprofessorsobj.get_all_professors()
+    return render_template("AllProfessor.html", allprofs=allprofs)
 
 
 @app.route("/postcoursereviews", methods=['POST'])
@@ -185,8 +203,6 @@ def gpostcoursereviews():
     industryroles = flask.request.values.get("industryroles")
     prereqs = flask.request.values.get("prereqs")
     difficulty = int(flask.request.values.get("difficulty"))
-    print("---------"*100)
-    print(flask.request.values)
 
     coursereviewsobj.add_course_review(
         CourseReviews(
